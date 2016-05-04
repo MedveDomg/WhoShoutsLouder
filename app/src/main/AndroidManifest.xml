@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="omg.medved.whoshoutslouder">
+    <uses-permission android:name="android.permission.RECORD_AUDIO"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".RecordsActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/start"/>
+        <activity android:name=".RulesActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/rules"/>
+        <activity android:name=".StartActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/start"/>
+        <activity android:name=".AboutActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/about"/>
+        <activity android:name=".PlayActivity"
+            android:parentActivityName=".StartActivity"
+            android:label="Play"/>
+        <activity android:name=".FinishActivity"
+            android:parentActivityName=".PlayActivity"
+            android:label="@string/finish"></activity>
+    </application>
+
+</manifest>

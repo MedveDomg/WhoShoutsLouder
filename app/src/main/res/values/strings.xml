@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Who shouts louder?</string>
+    <string name="start">Start</string>
+    <string name="records">Records</string>
+    <string name="rules">Rules</string>
+    <string name="about">About</string>
+    <string name="bottombanneratmainactivity">ca-app-pub-2486145208303593/5511260265</string>
+    <string name="go">Go</string>
+    <string name="finish">Finish</string>
+    <string name="howmanyplayers">How many players?</string>
+    <string name="timeforgame">How much time for one game?</string>
+    <string name="whatword">What is word?</string>
+    <string name="play">Play</string>
+    <string name="items">Items</string>
+    <string name="adapter">Adapter</string>
+    <string name="cursor">Cursor</string>
+
+</resources>
