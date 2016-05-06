@@ -1,13 +1,14 @@
 package omg.medved.whoshoutslouder;
 
 import android.app.ActionBar;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -20,8 +21,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+//import android.v4.app.Fragment;
 
-public class StartActivity extends FragmentActivity implements ListPlayersFragment.OnListDialogItemSelect {
+
+public class StartActivity extends FragmentActivity  {
 
     final String LOG_TAG = "myLogs";
 
@@ -63,6 +66,8 @@ public class StartActivity extends FragmentActivity implements ListPlayersFragme
     ListView listView;
 
     ArrayList<Player> listOfPlayers;
+    private static int mStackLevel = 0;
+
 
 
     @Override
@@ -176,27 +181,22 @@ public class StartActivity extends FragmentActivity implements ListPlayersFragme
     }
 
 
-    // обработчик нажатия на пункт списка диалога
-    DialogInterface.OnClickListener myClickListener = new DialogInterface.OnClickListener() {
-        public void onClick(DialogInterface dialog, int which) {
-            // выводим в лог позицию нажатого элемента
-            Log.d(LOG_TAG, "which = " + which);
-        }
-    };
-
     private void showFragment() {
-        FragmentManager fm = getSupportFragmentManager();
-//        ListPlayersFragment newFragment = new ListPlayersFragment(this, playersArrayList, "Players");
-        ListPlayersFragment fragment = new ListPlayersFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt("size", listOfPlayers.size());
-        fragment.setArguments(bundle);
-        fragment.show(fm, "tag");
-    }
+        mStackLevel++;
 
-    @Override
-    public void onListItemSelected(String selection) {
+        // DialogFragment.show() will take care of adding the fragment
+        // in a transaction.  We also want to remove any currently showing
+        // dialog, so make our own transaction and take care of that here.
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment prev = getSupportFragmentManager().findFragmentByTag("dialog");
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
 
+        // Create and show the dialog.
+        DialogFragment newFragment = ListPlayersFragment.newInstance(mStackLevel);
+        newFragment.show(ft, "dialog");
     }
 
 }
