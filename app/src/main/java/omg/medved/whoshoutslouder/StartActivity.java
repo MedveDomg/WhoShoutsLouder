@@ -26,8 +26,6 @@ public class StartActivity extends FragmentActivity implements ListPlayersFragme
     final String LOG_TAG = "myLogs";
 
 
-
-
     ArrayList<EditText> playersArrayList;
 
     ArrayAdapter<EditText> adapterPlayers;
@@ -48,7 +46,7 @@ public class StartActivity extends FragmentActivity implements ListPlayersFragme
 
 
     private static final String TAG = "myTAG";
-   public Counter counterPlayers;
+    public Counter counterPlayers;
     Counter counterMinutes;
     EditText edWord;
     public final String WORD_FROM_EDIT = "WORD";
@@ -64,7 +62,11 @@ public class StartActivity extends FragmentActivity implements ListPlayersFragme
 
     ListView listView;
 
+    ArrayList<Player> listOfPlayers;
+
+
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
@@ -73,6 +75,8 @@ public class StartActivity extends FragmentActivity implements ListPlayersFragme
 
         EditText editText = new EditText(this);
         editText.setText("sooka");
+
+        listOfPlayers = new ArrayList<>();
 
 //        playersArrayList = new ArrayList<EditText>();
 //        playersArrayList.add(0,editText);
@@ -85,25 +89,28 @@ public class StartActivity extends FragmentActivity implements ListPlayersFragme
 
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.imageButtonPlus:
+            case R.id.imagebutton_plus:
                 counterPlayers.plusOne();
 //                Log.d(TAG, counterPlayers + "PLUS");
 //                adapterPlayers.add(editText);
 //                adapterPlayers.notifyDataSetChanged();
+                listOfPlayers.add(new Player());
+                Log.d(LOG_TAG, "Amount of players: " + listOfPlayers.size());
                 break;
-            case R.id.imageButtonMinus:
+            case R.id.imagebutton_minus:
                 counterPlayers.minusOne();
                 Log.d(TAG, "PLUS");
+
 //                playersArrayList.remove("Player");
 //                adapterPlayers.add(editText);
 //                adapterPlayers.notifyDataSetChanged();
                 break;
-            case R.id.imagebuttonminusminutes:
+            case R.id.imagebutton_minus_minutes:
                 counterMinutes.minusOne();
 
                 Log.d(TAG, counterPlayers.toString() + "PLUS");
                 break;
-            case R.id.imageButtonplusminutes:
+            case R.id.imagebutton_plus_minutes:
                 counterMinutes.plusOne();
                 Log.d(TAG, counterPlayers.toString() + "PLUS");
                 break;
@@ -115,6 +122,10 @@ public class StartActivity extends FragmentActivity implements ListPlayersFragme
                 Intent intent = new Intent(this, PlayActivity.class);
                 intent.putExtra(WORD_FROM_EDIT, word);
                 startActivity(intent);
+                break;
+            case R.id.amount_of_players:
+                showFragment();
+                break;
         }
     }
 
@@ -124,13 +135,11 @@ public class StartActivity extends FragmentActivity implements ListPlayersFragme
         final Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Chunkfive.otf");
 
 
-
-
-        TextView howManyPlayers = (TextView) findViewById(R.id.howmanyplayers);
+        TextView howManyPlayers = (TextView) findViewById(R.id.textview_how_many_players);
 
         howManyPlayers.setTypeface(font);
 
-        tvAmountOfPlayers = (TextView) findViewById(R.id.amountofplayers);
+        tvAmountOfPlayers = (TextView) findViewById(R.id.amount_of_players);
         tvAmountOfPlayers.setTypeface(font);
 
         tvAmountOfPlayers.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -140,25 +149,25 @@ public class StartActivity extends FragmentActivity implements ListPlayersFragme
             }
         });
 
-        TextView tvTimeForGame = (TextView) findViewById(R.id.timeforgame);
+        TextView tvTimeForGame = (TextView) findViewById(R.id.time_for_game);
         tvTimeForGame.setTypeface(font);
 
-        tvAmountOfMinutes = (TextView) findViewById(R.id.amountofminutes);
+        tvAmountOfMinutes = (TextView) findViewById(R.id.amount_of_minutes);
         tvAmountOfMinutes.setTypeface(font);
 
-        TextView tvWhatWord = (TextView) findViewById(R.id.whatword);
+        TextView tvWhatWord = (TextView) findViewById(R.id.what_word);
         tvWhatWord.setTypeface(font);
 
-        edWord = (EditText) findViewById(R.id.editword);
+        edWord = (EditText) findViewById(R.id.edit_word);
         edWord.setTypeface(font);
 
-        imageButtonPlus = (ImageButton) findViewById(R.id.imageButtonPlus);
+        imageButtonPlus = (ImageButton) findViewById(R.id.imagebutton_plus);
 
-        imageButtonPlusMinutes = (ImageButton) findViewById(R.id.imageButtonplusminutes);
+        imageButtonPlusMinutes = (ImageButton) findViewById(R.id.imagebutton_plus_minutes);
 
-        imageButtonMinus = (ImageButton) findViewById(R.id.imageButtonMinus);
+        imageButtonMinus = (ImageButton) findViewById(R.id.imagebutton_minus);
 
-        imageButtonMinusMinutes = (ImageButton) findViewById(R.id.imagebuttonminusminutes);
+        imageButtonMinusMinutes = (ImageButton) findViewById(R.id.imagebutton_minus_minutes);
 
         Button buttonPlay = (Button) findViewById(R.id.play);
 
@@ -166,56 +175,6 @@ public class StartActivity extends FragmentActivity implements ListPlayersFragme
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
-    public void openDialogListView(View view) {
-        showFragment();
-//        ListPlayersFragment listPlayersFragment = new ListPlayersFragment();
-    }
-
-
-
-//    protected Dialog onCreateDialog(int id) {
-//        Dialog dialog;
-//        switch(id) {
-//            case 0:
-//
-//                String stringFont = "fonts/Chunkfive.otf";
-//
-//                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-//
-//                LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//
-//                alertDialogBuilder.setView(inflater.inflate(R.layout.login, null));
-//
-////                alertDialogBuilder.set
-//                alertDialogBuilder.setTitle("Players");
-//
-//                alertDialogBuilder.show();
-//                break;
-//            default:
-//                dialog = null;
-//        }
-//        return null;
-//    }
-
-//    protected void onPrepareDialog(int id, Dialog dialog) {
-//        // получаем доступ к адаптеру списка диалога
-//        AlertDialog aDialog = (AlertDialog) dialog;
-//        ListAdapter lAdapter = aDialog.getListView().getAdapter();
-//
-//        switch (id) {
-//
-//            case 0:
-//                // проверка возможности преобразования
-//                if (lAdapter instanceof BaseAdapter) {
-//                    // преобразование и вызов метода-уведомления о новых данных
-//                    BaseAdapter bAdapter = (BaseAdapter) lAdapter;
-//                    bAdapter.notifyDataSetChanged();
-//                }
-//                break;
-//            default:
-//                break;
-//        }
-//    };
 
     // обработчик нажатия на пункт списка диалога
     DialogInterface.OnClickListener myClickListener = new DialogInterface.OnClickListener() {
@@ -225,10 +184,14 @@ public class StartActivity extends FragmentActivity implements ListPlayersFragme
         }
     };
 
-    private void showFragment(){
+    private void showFragment() {
         FragmentManager fm = getSupportFragmentManager();
-        ListPlayersFragment newFragment = new ListPlayersFragment(this,playersArrayList,"Players");
-        newFragment.show(fm,"tag");
+//        ListPlayersFragment newFragment = new ListPlayersFragment(this, playersArrayList, "Players");
+        ListPlayersFragment fragment = new ListPlayersFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("size", listOfPlayers.size());
+        fragment.setArguments(bundle);
+        fragment.show(fm, "tag");
     }
 
     @Override

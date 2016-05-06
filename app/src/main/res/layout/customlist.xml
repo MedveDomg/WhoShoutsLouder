@@ -6,7 +6,7 @@
 
 
     <EditText
-        android:id="@+id/textView1"
+        android:id="@+id/textview"
         android:text="adsaddsdsa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
