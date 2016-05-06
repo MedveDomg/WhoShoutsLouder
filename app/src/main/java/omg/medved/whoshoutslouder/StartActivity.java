@@ -65,7 +65,7 @@ public class StartActivity extends FragmentActivity  {
 
     ListView listView;
 
-    ArrayList<Player> listOfPlayers;
+    ArrayList<Player> mNamesListOfPlayers;
     private static int mStackLevel = 0;
 
 
@@ -81,7 +81,7 @@ public class StartActivity extends FragmentActivity  {
         EditText editText = new EditText(this);
         editText.setText("sooka");
 
-        listOfPlayers = new ArrayList<>();
+        mNamesListOfPlayers = new ArrayList<>();
 
 //        playersArrayList = new ArrayList<EditText>();
 //        playersArrayList.add(0,editText);
@@ -99,8 +99,9 @@ public class StartActivity extends FragmentActivity  {
 //                Log.d(TAG, counterPlayers + "PLUS");
 //                adapterPlayers.add(editText);
 //                adapterPlayers.notifyDataSetChanged();
-                listOfPlayers.add(new Player());
-                Log.d(LOG_TAG, "Amount of players: " + listOfPlayers.size());
+                mNamesListOfPlayers.add(new Player());
+
+                Log.d(LOG_TAG, "Amount of players: " + mNamesListOfPlayers.size());
                 break;
             case R.id.imagebutton_minus:
                 counterPlayers.minusOne();
@@ -195,7 +196,7 @@ public class StartActivity extends FragmentActivity  {
         ft.addToBackStack(null);
 
         // Create and show the dialog.
-        DialogFragment newFragment = ListPlayersFragment.newInstance(mStackLevel);
+        DialogFragment newFragment = ListPlayersFragment.newInstance(mNamesListOfPlayers);
         newFragment.show(ft, "dialog");
     }
 
